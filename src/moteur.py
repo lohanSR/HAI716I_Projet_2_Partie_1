@@ -9,8 +9,9 @@ GAINS = {
     ('D', 'D'): (2, 2) 
 }
 
-def jouer_partie(strat1: Strategie, strat2: Strategie, nb_tours: int, alea) :
+def jouer_partie(strat1: Strategie, strat2: Strategie, nb_tours: int, alea: random.Random) :
     """
+    Joue une partie pour un nombre de tours fixé entre deux stratégies
     """
     strat1.reinitialiser()
     strat2.reinitialiser()
@@ -20,7 +21,7 @@ def jouer_partie(strat1: Strategie, strat2: Strategie, nb_tours: int, alea) :
 
     for _ in range(nb_tours):
         coup1 = strat1.jouer(hist1, hist2, alea)
-        coup2 = strat2.jouer(hist1, hist2, alea)
+        coup2 = strat2.jouer(hist2, hist1, alea)
 
         gain1, gain2 = GAINS[(coup1, coup2)]
         score1 += gain1
@@ -31,8 +32,9 @@ def jouer_partie(strat1: Strategie, strat2: Strategie, nb_tours: int, alea) :
 
     return (score1, score2), (hist1, hist2)
 
-def jouer_rencontre(strat1, strat2, nb_parties, nb_tours, graine):
+def jouer_rencontre(strat1: Strategie, strat2: Strategie, nb_parties: int, nb_tours: int, graine: int):
     """
+    Joue une rencontre complète entre deux stratégies sur plusieurs parties
     """
     total_score1, total_score2 = 0, 0
     alea = random.Random(graine)
@@ -45,8 +47,9 @@ def jouer_rencontre(strat1, strat2, nb_parties, nb_tours, graine):
 
     return total_score1, total_score2
 
-def tournoi(population, nb_parties, nb_tours, graine=42):
+def tournoi(population: list[Strategie], nb_parties: int, nb_tours: int, graine=42):
     """
+    Organise un tournoi entre les stratégies, chaque stratégie affronte toutes les autres stratégies
     """
     n = len(population)
     matrice_scores = [[0] * n for _ in range(n)]
@@ -62,18 +65,16 @@ def tournoi(population, nb_parties, nb_tours, graine=42):
 
     return matrice_scores
 
-def classement(population, matrice_scores):
+def classement(population: list[Strategie], matrice_scores: list[list[int]]):
     """
+    Calcule le score total de chaque participant et génère le classement final
     """
     scores_totaux = []
 
     for i in range(len(population)):
         score_total = sum(matrice_scores[i])
         nom_strategie = getattr(population[i], "nom")
-        scores_totaux[i] = (score_total, nom_strategie)
+        scores_totaux.append((score_total, nom_strategie))
 
     scores_totaux.sort(reverse=True, key=lambda x: x[0])
     return scores_totaux
-
-
-            
