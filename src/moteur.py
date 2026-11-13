@@ -44,6 +44,8 @@ def jouer_rencontre(strat1, strat2, nb_parties, nb_tours):
     return total_score1, total_score2
 
 def tournoi(population, nb_parties, nb_tours):
+    """
+    """
     n = len(population)
     matrice_scores = [[0] * n for _ in range(n)]
 
@@ -54,5 +56,19 @@ def tournoi(population, nb_parties, nb_tours):
             matrice_scores[j][i] = score_j
 
     return matrice_scores
+
+def classement(population, matrice_scores):
+    """
+    """
+    scores_totaux = []
+
+    for i in range(len(population)):
+        score_total = sum(matrice_scores[i])
+        nom_strategie = getattr(population[i], "nom")
+        scores_totaux[i] = (score_total, nom_strategie)
+
+    scores_totaux.sort(reverse=True, key=lambda x: x[0])
+    return scores_totaux
+
 
             
