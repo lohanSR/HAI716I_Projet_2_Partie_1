@@ -1,3 +1,4 @@
+
 import random
 
 from src.strategies import Strategie
@@ -32,15 +33,14 @@ def jouer_partie(strat1: Strategie, strat2: Strategie, nb_tours: int, alea: rand
 
     return (score1, score2), (hist1, hist2)
 
-def jouer_rencontre(strat1: Strategie, strat2: Strategie, nb_parties: int, nb_tours: int, graine: int):
+def jouer_rencontre(strat1: Strategie, strat2: Strategie, nb_parties: int, nb_tours: int, graine: str):
     """
     Joue une rencontre complète entre deux stratégies sur plusieurs parties
     """
     total_score1, total_score2 = 0, 0
-    alea = random.Random(graine)
 
-    for _ in range(nb_parties):
-        alea_partie = random.Random(alea.randint(0, 1000000))
+    for k in range(nb_parties):
+        alea_partie = random.Random(f"{graine}-{k}")
         (score1, score2), _ = jouer_partie(strat1, strat2, nb_tours, alea_partie)
         total_score1 += score1
         total_score2 += score2
@@ -54,11 +54,9 @@ def tournoi(population: list[Strategie], nb_parties: int, nb_tours: int, graine=
     n = len(population)
     matrice_scores = [[0] * n for _ in range(n)]
 
-    alea = random.Random(graine)
-
     for i in range(n):
-        for j in range(i, n):
-            graine_rencontre = alea.randint(0, 1000000)
+        for j in range(i + 1, n):
+            graine_rencontre = f"{graine}-{i}-{j}"
             score_i, score_j = jouer_rencontre(population[i], population[j], nb_parties, nb_tours, graine_rencontre)
             matrice_scores[i][j] = score_i
             matrice_scores[j][i] = score_j
