@@ -88,3 +88,16 @@ class Tester(Strategie):
         if (tour - 1) % 3 == 2:
             return 'D'
         return 'C'
+
+class Grim(Strategie):
+    """
+    Joue C tant que l'adversaire joue C, sinon joue D pour le reste de la partie
+    """
+    def __init__(self):
+        super().__init__("GRIM")
+
+    def jouer(self, mon_historique, historique_adverse, alea):
+        if 'D' in historique_adverse:
+            return 'D'
+
+        return 'C'
