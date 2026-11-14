@@ -1,0 +1,14 @@
+Nombre de parties : 5, nombre de tours : 200, graine : 42
+1. ALL-D          9554
+2. TESTER         9074
+3. TIT-FOR-TAT    9032
+4. JOSS           8771
+5. RANDOM         8351
+
+Matrice des scores (ligne = score obtenu contre la colonne) :
+                    ALL-D  TIT-FOR-TAT       RANDOM         JOSS       TESTER
+ALL-D                   -         2015         3524         2015         2000
+TIT-FOR-TAT          1990            -         2484         2058         2500
+RANDOM                984         2499            -         2371         2497
+JOSS                 1990         2083         2636            -         2062
+TESTER               2000         2500         2512         2062            -
