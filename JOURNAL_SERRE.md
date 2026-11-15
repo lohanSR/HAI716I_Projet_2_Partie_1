@@ -144,15 +144,13 @@ Je pense aussi que GRIM, PAVLOV et les stratégies utilisant de l'aléatoire (JO
 
 Mes prédictions sont en partie correctes :
 
-ALL-D descend de la 2e à la 5e place.
-
-TFT passe de la 3e à la 1re place.
-
-GRIM descend de la 1re à la 3e place.
+- ALL-D descend de la 2e à la 5e place.
+- TFT passe de la 3e à la 1re place.
+- GRIM descend de la 1re à la 3e place.
 
 En revanche, PAVLOV et RANDOM montent dans le classement, contrairement à ce que je pensais.
 
-**Bilan :** avec cette matrice, la coopération rapporte davantage et la trahison systématique est moins intéressante.
+**Bilan :** Avec cette matrice, la coopération rapporte davantage et la trahison systématique est moins intéressante.
 
 ### 2. Horizon inconnu
 
@@ -183,13 +181,10 @@ Selon moi, le fait que les parties durent plus ou moins longtemps ne devrait pas
 **Comparaison avec la prédiction :**
 Mes prédictions ne sont pas vraiment confirmées :
 
-TFT passe de la 3e à la 1re place.
-
-ALL-D reste 2e, mais ne prend pas la tête.
-
-GRIM descend de la 1re à la 5e place.
-
-JOSS remonte de la 6e à la 3e place.
+- TFT passe de la 3e à la 1re place.
+- ALL-D reste 2e, mais ne prend pas la tête.
+- GRIM descend de la 1re à la 5e place.
+- JOSS remonte de la 6e à la 3e place.
 
 Le classement change donc davantage. Les stratégies qui trahissent ne sont pas toutes avantagées, et TFT termine première.
 
