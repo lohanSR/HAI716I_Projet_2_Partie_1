@@ -66,3 +66,34 @@ TFT gagnera-t-il ? Non, je pense que TFT ne finira pas 1er : ALL-D remportera le
   - **La population.** En 1980, 15 programmes, dont beaucoup ne trahissaient jamais en premier. Ici, TFT est le seul : il n'a aucun partenaire de coopération durable (écho contre JOSS et TESTER), et ne dépasse jamais 2,5 points par tour.
   - **RANDOM.** ALL-D lui prend 3524 points, environ 1000 de plus que TFT. Sans la colonne RANDOM, ALL-D finirait dernier.
   - **Pas de partie contre soi-même.** En 1980, chaque programme jouait aussi contre son double. Avec ces parties (calcul à part), TFT passe 1er : TFT contre TFT rapporte 3000, ALL-D contre ALL-D 2000.
+
+## Étape 2
+
+### Nouvelles stratégies :
+
+- `Grim` : coopère tant que l'adversaire n'a jamais trahi, dès la première trahison, fait défection jusqu'à la fin de la partie. Origine : Friedman (1971), "grim trigger". Aucun pardon, l'opposé de la règle 3 d'Axelrod.
+- `Pavlov` : gagne-reste, perd-change. Coopère au premier tour, si le dernier coup a rapporté 3 ou 5 points, le rejoue, sinon change de coup. Origine : Nowak et Sigmund (1993). Elle regarde son propre gain, pas le coup de l'adversaire comme TFT.
+- Population de l'étape 2 : les 5 stratégies de l'étape 1, puis GRIM et PAVLOV ajoutées à la fin pour garder les mêmes graines. Même protocole : 5 parties de 200 tours, graine 42, sans partie contre soi-même.
+
+### Prédiction avant le lancement
+
+Qui aura le plus de points dans chaque nouveau duel :
+
+| | ALL-D | TFT | RANDOM | JOSS | TESTER | GRIM | PAVLOV |
+|---|---|---|---|---|---|---|---|
+| **GRIM** | ALL-D | égalité | GRIM | proche | proche | - | égalité |
+| **PAVLOV** | ALL-D | égalité | dépend du hasard | proche | proche | égalité | - |
+
+Pourquoi : ALL-D ne gagne des points en plus contre ces deux stratégies qu'au premier tour ; ensuite, chacun marque 2 points par tour. GRIM et PAVLOV auront le score maximal l'un contre l'autre et contre TFT, qui est gentil. Il est difficile de savoir ce que les deux feront contre TESTER et JOSS, mais GRIM gagnera face à RANDOM après son premier D, alors que PAVLOV dépend de la chance face à l'imprévisibilité de RANDOM.
+
+Classement attendu :
+
+1. GRIM
+2. TFT
+3. PAVLOV
+4. TESTER
+5. ALL-D
+6. JOSS
+7. RANDOM
+
+Qu'est-ce qui change par rapport à l'étape 1 ? Nous avons plus de stratégies gentilles, qui gagneront plus de points les unes contre les autres, ce qui va les aider à occuper le podium. ALL-D perd trop de points contre elles et descend donc dans le classement. Il est difficile de prédire où va TESTER, mais je dirais juste après les stratégies gentilles, car il utilise un mécanisme proche du leur. JOSS et RANDOM restent aux dernières places.

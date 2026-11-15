@@ -1,4 +1,6 @@
-from src.strategies import AllD, TFT, Random, Joss, Tester
+import argparse
+
+from src.strategies import AllD, TFT, Random, Joss, Tester, Grim, Pavlov
 from src.moteur import tournoi, classement
 
 NB_PARTIES = 5
@@ -8,6 +10,17 @@ GRAINE = 42
 def population_etape1():
 
     return [AllD(), TFT(), Random(), Joss(), Tester()]
+
+
+def population_etape2():
+
+    return population_etape1() + [Grim(), Pavlov()]
+
+
+POPULATIONS = {
+    "etape1": population_etape1,
+    "etape2": population_etape2,
+}
 
 
 def afficher_classement(resultats):
@@ -33,11 +46,16 @@ def afficher_matrice(population, matrice_scores):
 
 def main():
 
-    population = population_etape1()
+    parser = argparse.ArgumentParser(description="Tournoi du dilemme du prisonnier itéré")
+    parser.add_argument("etape", choices=POPULATIONS.keys(), help="étape à lancer")
+    etape = parser.parse_args().etape
+
+    population = POPULATIONS[etape]()
     matrice_scores = tournoi(population, NB_PARTIES, NB_TOURS, GRAINE)
     resultats = classement(population, matrice_scores)
 
-    print (f"Nombre de parties : {NB_PARTIES}, nombre de tours : {NB_TOURS}, graine : {GRAINE}")
+    print(f"Étape : {etape}")
+    print(f"Nombre de parties : {NB_PARTIES}, nombre de tours : {NB_TOURS}, graine : {GRAINE}")
     afficher_classement(resultats)
     print()
     afficher_matrice(population, matrice_scores)
