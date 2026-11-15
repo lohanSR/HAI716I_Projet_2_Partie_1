@@ -27,6 +27,7 @@ MODES = {
     "normal": {},
     "cerf": {"gains": GAINS_CERF},
     "horizon": {"w": 0.99},
+    "bruit": {"bruit": 0.05},
 }
 
 

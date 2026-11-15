@@ -118,3 +118,33 @@ Qu'est-ce qui change par rapport à l'étape 1 ? Nous avons plus de stratégies 
 - Le vainqueur : GRIM prend la première place à ALL-D, grâce non seulement à ses points contre TFT et PAVLOV (coopération mutuelle, 3000 chacun), mais aussi aux points marqués contre RANDOM.
 - TFT : il reste 3e, mais gagne 6000 points (3000 contre GRIM, 3000 contre PAVLOV) grâce à la coopération mutuelle. Il finit à seulement 37 points de la deuxième place.
 - ALL-D : il passe de la 1re à la 2e place. Les deux nouvelles stratégies lui rapportent très différemment : GRIM le punit jusqu'à la fin de la partie dès sa première trahison (2015 points seulement, comme contre TFT), alors que PAVLOV se laisse exploiter (3500). Sans PAVLOV, ALL-D passerait derrière TFT. Il reste aussi le grand profiteur de RANDOM (3524).
+
+## Étape 3 : modifications du tournoi
+
+### Choix et justification
+
+- **Bruit** : c'est la suite directe des étapes 1 et 2. On a déjà observé l'écho entre TFT, TESTER et JOSS, et le cours montre qu'une seule erreur suffit à le déclencher. Les stratégies de l'étape 2 réagissent très différemment à une erreur : GRIM ne pardonne jamais, PAVLOV change de coup après un mauvais gain, TFT rend la pareille.
+
+### Protocole du bruit
+
+- Population de l'étape 2 (7 stratégies), 5 parties de 200 tours, graine 42, sans partie contre soi-même : seul le bruit change par rapport à l'étape 2.
+- Probabilité d'erreur : 5 % par coup, la valeur proposée par le sujet.
+- Type d'erreur : erreur d'exécution. Le coup est réellement inversé, il compte pour les gains et les deux joueurs voient le coup inversé. C'est plus simple qu'une erreur de perception, où seul l'adversaire voit le mauvais coup.
+
+### Prédiction du bruit
+
+Quelles stratégies souffrent le plus des erreurs, et pourquoi : GRIM, TFT et PAVLOV vont perdre beaucoup de points entre eux après la première erreur. Pour TESTER, le résultat peut changer ou non. Pour JOSS et RANDOM, je pense que le bruit n'aura pas un grand effet, puisqu'ils subissent déjà les effets du hasard. ALL-D est touché aussi, il jouera C environ une fois sur vingt.
+
+Quelles stratégies s'en remettent, et pourquoi : GRIM ne s'en remet jamais, une seule erreur le fait trahir jusqu'à la fin de la partie. TFT rend la pareille, une erreur peut donc lancer un écho qui dure jusqu'à une nouvelle erreur. PAVLOV change de coup après un mauvais gain, il peut donc revenir à la coopération. RANDOM n'est pas touché, inverser un coup tiré au hasard donne encore un coup au hasard.
+
+Classement attendu :
+
+1. ALL-D
+2. GRIM
+3. TESTER
+4. TFT
+5. PAVLOV
+6. JOSS
+7. RANDOM
+
+Le vainqueur change-t-il par rapport à l'étape 2 ? Oui, c'est ALL-D qui va profiter de la baisse des points de GRIM.

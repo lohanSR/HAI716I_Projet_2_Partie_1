@@ -17,7 +17,10 @@ GAINS_CERF = {
     ('D', 'D'): (1, 1)
 }
 
-def jouer_partie(strat1: Strategie, strat2: Strategie, nb_tours: int, alea: random.Random, gains=GAINS, w=None):
+def inverser(coup):
+    return 'D' if coup == 'C' else 'C'
+
+def jouer_partie(strat1: Strategie, strat2: Strategie, nb_tours: int, alea: random.Random, gains=GAINS, w=None, bruit=0.0):
     """
     Joue une partie pour un nombre de tours fixé entre deux stratégies
     """
@@ -36,6 +39,14 @@ def jouer_partie(strat1: Strategie, strat2: Strategie, nb_tours: int, alea: rand
         coup1 = strat1.jouer(hist1, hist2, alea)
         coup2 = strat2.jouer(hist2, hist1, alea)
 
+        # Bruit : chaque coup est inversé avec la probabilité bruit (erreur d'exécution,
+        # le coup inversé compte pour les gains et les deux joueurs le voient)
+        if bruit > 0:
+            if alea.random() < bruit:
+                coup1 = inverser(coup1)
+            if alea.random() < bruit:
+                coup2 = inverser(coup2)
+
         gain1, gain2 = gains[(coup1, coup2)]
         score1 += gain1
         score2 += gain2
@@ -50,7 +61,7 @@ def jouer_partie(strat1: Strategie, strat2: Strategie, nb_tours: int, alea: rand
 
     return (score1, score2), (hist1, hist2)
 
-def jouer_rencontre(strat1: Strategie, strat2: Strategie, nb_parties: int, nb_tours: int, graine: str, gains=GAINS, w=None):
+def jouer_rencontre(strat1: Strategie, strat2: Strategie, nb_parties: int, nb_tours: int, graine: str, gains=GAINS, w=None, bruit=0.0):
     """
     Joue une rencontre complète entre deux stratégies sur plusieurs parties
     """
@@ -58,13 +69,13 @@ def jouer_rencontre(strat1: Strategie, strat2: Strategie, nb_parties: int, nb_to
 
     for k in range(nb_parties):
         alea_partie = random.Random(f"{graine}-{k}")
-        (score1, score2), _ = jouer_partie(strat1, strat2, nb_tours, alea_partie, gains, w)
+        (score1, score2), _ = jouer_partie(strat1, strat2, nb_tours, alea_partie, gains, w, bruit)
         total_score1 += score1
         total_score2 += score2
 
     return total_score1, total_score2
 
-def tournoi(population: list[Strategie], nb_parties: int, nb_tours: int, graine=42, gains=GAINS, w=None):
+def tournoi(population: list[Strategie], nb_parties: int, nb_tours: int, graine=42, gains=GAINS, w=None, bruit=0.0):
     """
     Organise un tournoi entre les stratégies, chaque stratégie affronte toutes les autres stratégies
     """
@@ -74,7 +85,7 @@ def tournoi(population: list[Strategie], nb_parties: int, nb_tours: int, graine=
     for i in range(n):
         for j in range(i + 1, n):
             graine_rencontre = f"{graine}-{i}-{j}"
-            score_i, score_j = jouer_rencontre(population[i], population[j], nb_parties, nb_tours, graine_rencontre, gains, w)
+            score_i, score_j = jouer_rencontre(population[i], population[j], nb_parties, nb_tours, graine_rencontre, gains, w, bruit)
             matrice_scores[i][j] = score_i
             matrice_scores[j][i] = score_j
 
