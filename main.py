@@ -1,11 +1,12 @@
 import argparse
 
 from src.strategies import AllD, TFT, Random, Joss, Tester, Grim, Pavlov
-from src.moteur import tournoi, classement, GAINS_CERF
+from src.moteur import tournoi, classement, selection, GAINS_CERF
 
 NB_PARTIES = 5
 NB_TOURS = 200
 GRAINE = 42
+NB_GENERATIONS = 100
 
 def population_etape1():
 
@@ -28,6 +29,7 @@ MODES = {
     "cerf": {"gains": GAINS_CERF},
     "horizon": {"w": 0.99},
     "bruit": {"bruit": 0.05},
+    "selection": {"contre_soi": True},
 }
 
 
@@ -37,7 +39,7 @@ def afficher_classement(resultats):
         print(f"{rang}. {nom:<12} {score:>6}")
 
 
-def afficher_matrice(population, matrice_scores):
+def afficher_matrice(population, matrice_scores, contre_soi=False):
 
     noms = [strategie.nom for strategie in population]
 
@@ -48,8 +50,20 @@ def afficher_matrice(population, matrice_scores):
     for i, nom in enumerate(noms):
         cases = ""
         for j, score in enumerate(matrice_scores[i]):
-            cases += f"{'-' if i == j else score:>13}"
+            cases += f"{'-' if i == j and not contre_soi else score:>13}"
         print(f"{nom:<12}{cases}")
+
+
+def afficher_selection(population, historique, pas=10):
+
+    noms = [strategie.nom for strategie in population]
+
+    print("Part de chaque stratégie dans la population (en %) :")
+    print(f"{'Génération':<12}" + "".join(f"{nom:>13}" for nom in noms))
+
+    for generation in range(0, len(historique), pas):
+        parts = historique[generation]
+        print(f"{generation:<12}" + "".join(f"{100 * part:>13.2f}" for part in parts))
 
 
 def main():
@@ -67,9 +81,16 @@ def main():
 
     print(f"Étape : {etape}, mode : {mode}")
     print(f"Nombre de parties : {NB_PARTIES}, nombre de tours : {NB_TOURS}, graine : {GRAINE}")
-    afficher_classement(resultats)
+    contre_soi = MODES[mode].get("contre_soi", False)
+
+    if mode == "selection":
+        print(f"Nombre de générations : {NB_GENERATIONS}, parts initiales égales")
+        afficher_selection(population, selection(matrice_scores, NB_GENERATIONS))
+    else:
+        afficher_classement(resultats)
+
     print()
-    afficher_matrice(population, matrice_scores)
+    afficher_matrice(population, matrice_scores, contre_soi)
 
 
 if __name__ == "__main__":

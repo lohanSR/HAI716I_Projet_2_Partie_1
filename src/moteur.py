@@ -1,4 +1,5 @@
 
+import copy
 import random
 
 from src.strategies import Strategie
@@ -75,7 +76,7 @@ def jouer_rencontre(strat1: Strategie, strat2: Strategie, nb_parties: int, nb_to
 
     return total_score1, total_score2
 
-def tournoi(population: list[Strategie], nb_parties: int, nb_tours: int, graine=42, gains=GAINS, w=None, bruit=0.0):
+def tournoi(population: list[Strategie], nb_parties: int, nb_tours: int, graine=42, gains=GAINS, w=None, bruit=0.0, contre_soi=False):
     """
     Organise un tournoi entre les stratégies, chaque stratégie affronte toutes les autres stratégies
     """
@@ -83,6 +84,13 @@ def tournoi(population: list[Strategie], nb_parties: int, nb_tours: int, graine=
     matrice_scores = [[0] * n for _ in range(n)]
 
     for i in range(n):
+        # Partie contre soi-même : contre une copie, pour ne pas partager l'état interne.
+        # On garde le score d'un seul des deux joueurs.
+        if contre_soi:
+            copie = copy.deepcopy(population[i])
+            score_i, _ = jouer_rencontre(population[i], copie, nb_parties, nb_tours, f"{graine}-{i}-{i}", gains, w, bruit)
+            matrice_scores[i][i] = score_i
+
         for j in range(i + 1, n):
             graine_rencontre = f"{graine}-{i}-{j}"
             score_i, score_j = jouer_rencontre(population[i], population[j], nb_parties, nb_tours, graine_rencontre, gains, w, bruit)
@@ -104,3 +112,23 @@ def classement(population: list[Strategie], matrice_scores: list[list[int]]):
 
     scores_totaux.sort(reverse=True, key=lambda x: x[0])
     return scores_totaux
+
+
+def selection(matrice_scores: list[list[int]], nb_generations: int, parts_initiales=None):
+    """
+    Fait évoluer la part de chaque stratégie dans la population sur plusieurs générations.
+    Le score d'une stratégie est la moyenne de ses scores contre chaque adversaire, pondérée
+    par la part de cet adversaire. Sa nouvelle part est proportionnelle à sa part actuelle
+    multipliée par ce score. Renvoie la liste des parts à chaque génération (génération 0 comprise).
+    """
+    n = len(matrice_scores)
+    parts = parts_initiales or [1 / n] * n
+    historique = [parts]
+
+    for _ in range(nb_generations):
+        scores = [sum(parts[j] * matrice_scores[i][j] for j in range(n)) for i in range(n)]
+        score_moyen = sum(parts[i] * scores[i] for i in range(n))
+        parts = [parts[i] * scores[i] / score_moyen for i in range(n)]
+        historique.append(parts)
+
+    return historique

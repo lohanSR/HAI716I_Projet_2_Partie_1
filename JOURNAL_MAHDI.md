@@ -124,6 +124,7 @@ Qu'est-ce qui change par rapport à l'étape 1 ? Nous avons plus de stratégies 
 ### Choix et justification
 
 - **Bruit** : c'est la suite directe des étapes 1 et 2. On a déjà observé l'écho entre TFT, TESTER et JOSS, et le cours montre qu'une seule erreur suffit à le déclencher. Les stratégies de l'étape 2 réagissent très différemment à une erreur : GRIM ne pardonne jamais, PAVLOV change de coup après un mauvais gain, TFT rend la pareille.
+- **Sélection** : elle montre qui survit sur plusieurs générations, et pas seulement qui gagne un tournoi. Elle permet de vérifier si le vainqueur de l'étape 2 reste le meilleur quand la population évolue.
 
 ### Protocole du bruit
 
@@ -169,3 +170,21 @@ Le vainqueur change-t-il par rapport à l'étape 2 ? Oui, c'est ALL-D qui va pro
 - GRIM : il perd des points contre TFT (3000 avant, 2222 ici), mais il en gagne contre PAVLOV (3000 avant, 3370 ici). Après la première erreur, GRIM trahit jusqu'à la fin de la partie et joue donc comme ALL-D. PAVLOV alterne alors C et D face à lui, comme face à ALL-D, et GRIM l'exploite un tour sur deux. Les deux effets se compensent, c'est pour ça que son total ne bouge presque pas.
 - TFT et PAVLOV : ce sont les grands perdants, 1277 points en moins pour TFT et 2010 pour PAVLOV. Ils ne marquent plus 3000 contre GRIM, ni l'un contre l'autre (environ 2500). Contre TFT, PAVLOV ne retrouve pas une coopération stable après une erreur, et contre GRIM il se fait exploiter.
 - ALL-D, JOSS et RANDOM : ils profitent des erreurs des autres. ALL-D gagne 384 points car les erreurs de ses adversaires lui donnent des C à exploiter. JOSS gagne 602 points car les nouvelles erreurs cassent parfois ses échos avec TFT (2083 avant, 2404 ici) et TESTER (2062 avant, 2366 ici). RANDOM gagne 367 points sans changer de comportement, puisque inverser un coup tiré au hasard donne encore un coup au hasard.
+
+### Protocole de la sélection
+
+- Population de l'étape 2 (7 stratégies), parts initiales égales (1/7 chacune), 100 générations.
+- La matrice des scores est calculée une seule fois (5 parties de 200 tours, graine 42), puis réutilisée à chaque génération.
+- À chaque génération, le score d'une stratégie est la moyenne de ses scores contre chaque adversaire, pondérée par la part de cet adversaire. La nouvelle part d'une stratégie est proportionnelle à sa part actuelle multipliée par ce score.
+- Parties contre soi-même incluses : dans une population, une stratégie croise forcément ses propres copies. C'est un changement de cadre par rapport aux étapes 1 et 2, où l'on comparait des stratégies uniques.
+
+
+### Prédiction de la sélection
+
+Qui disparaît en premier, et pourquoi : RANDOM, puisqu'il est toujours dernier. Une stratégie est considérée comme disparue quand sa part passe sous 1 %, car sa part tend vers 0 sans jamais l'atteindre.
+
+Qui domine à la fin, et pourquoi : GRIM, puisqu'il va remporter les premières générations : sa part va augmenter, ce qui le maintiendra en tête. À nuancer : à l'étape 2, l'avance de GRIM sur TFT venait de RANDOM. Si RANDOM disparaît en premier, cette avance disparaît aussi.
+
+Une seule stratégie survit-elle, ou plusieurs ? Plusieurs. Une fois les stratégies basées sur le hasard et sur les tests disparues, seules les stratégies gentilles resteront avec ALL-D, qui disparaîtra en dernier. Il ne restera alors que GRIM, TFT et PAVLOV. Les parties contre soi-même comptent ici : GRIM, TFT et PAVLOV coopèrent tout du long contre leurs copies, ALL-D fait défection contre les siennes. Si seules GRIM, TFT et PAVLOV restent, elles marquent toutes 3000 entre elles et leurs parts ne bougent plus.
+
+Le vainqueur de la sélection est-il le même que celui du tournoi de l'étape 2 ? Oui, GRIM restera le vainqueur, car cette modification ne change rien à court terme et fait pencher la balance en sa faveur à long terme.
