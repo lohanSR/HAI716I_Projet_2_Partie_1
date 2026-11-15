@@ -1,5 +1,8 @@
+
+import sys
+
 from src.strategies import AllD, TFT, Random, Joss, Tester
-from src.moteur import tournoi, classement
+from src.moteur import tournoi, classement, GAINS_CERF
 
 NB_PARTIES = 5
 NB_TOURS = 200
@@ -33,10 +36,23 @@ def afficher_matrice(population, matrice_scores):
 
 def main():
 
+    mode = sys.argv[1] if len(sys.argv) > 1 else "normal"
+
     population = population_etape1()
-    matrice_scores = tournoi(population, NB_PARTIES, NB_TOURS, GRAINE)
+
+    if mode == "cerf":
+        matrice_scores = tournoi(population, NB_PARTIES, NB_TOURS, GRAINE, gains=GAINS_CERF)
+    elif mode == "horizon":
+        matrice_scores = tournoi(population, NB_PARTIES, NB_TOURS, GRAINE, w=0.99)
+    elif mode == "normal":
+        matrice_scores = tournoi(population, NB_PARTIES, NB_TOURS, GRAINE)
+    else:
+        print("Mode inconnu : choisir normal, cerf ou horizon")
+        return
+
     resultats = classement(population, matrice_scores)
 
+    print(f"Mode : {mode}")
     print (f"Nombre de parties : {NB_PARTIES}, nombre de tours : {NB_TOURS}, graine : {GRAINE}")
     afficher_classement(resultats)
     print()
