@@ -11,7 +11,7 @@
 
 **Protocole :** 5 parties de 200 tours par rencontre, sans matchs contre soi-même. Graine fixée à 42 pour obtenir des résultats reproductibles.
 
-## Étape 1 — Tournoi de base
+## Étape 1 : Tournoi de base
 
 ### 1. Les stratégies
 
@@ -85,7 +85,7 @@ Cela montre que le résultat d'une stratégie dépend beaucoup des adversaires p
 - **Matchs contre soi-même :** au début, le mini-tournoi donnait 78 / 78 / 66 au lieu de 48 / 48 / 46. J'ai exclu ces rencontres avec `range(i + 1, n)`.
 - **Graines aléatoires :** ajouter une stratégie pouvait changer les tirages de certaines rencontres. Maintenant, les graines dépendent des indices des joueurs et du numéro de partie.
 
-## Étape 2 — Ajout de deux stratégies
+## Étape 2 : Ajout de deux stratégies
 
 2 nouvelles stratégies :
 
@@ -110,7 +110,7 @@ Cela montre que le résultat d'une stratégie dépend beaucoup des adversaires p
 
 **Bilan :** GRIM prend la première place à ALL-D. Elle gagne beaucoup de points contre TFT et PAVLOV grâce à la coopération, ainsi que contre RANDOM. ALL-D reste deuxième, notamment parce qu'elle profite de RANDOM et des réactions de PAVLOV. TFT reste troisième. Les scores totaux augmentent parce qu'il y a plus d'adversaires.
 
-## Étape 3 — Deux modifications du tournoi
+## Étape 3 : Deux modifications du tournoi
 
 Deux modifications du tournoi avec les sept stratégies de l'étape 2 : la chasse au cerf et l'horizon inconnu.
 
