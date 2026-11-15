@@ -101,3 +101,25 @@ class Grim(Strategie):
             return 'D'
 
         return 'C'
+
+class Pavlov(Strategie):
+    """
+    C au premier tour. Si le dernier coup a rapporté 3 ou 5 points, le rejoue,
+    s'il a rapporté 0 ou 2 points, change de coup
+    """
+
+    def __init__(self, nom="PAVLOV"):
+        super().__init__(nom)
+
+    def jouer(self, mon_historique, historique_adverse, alea):
+        if len(mon_historique) == 0:
+            return 'C'
+
+        # 3 ou 5 points <=> l'adversaire a coopéré au dernier tour
+        if historique_adverse[-1] == 'C':
+            return mon_historique[-1]
+
+        # 0 ou 2 points <=> l'adversaire a trahi : on change de coup
+        if mon_historique[-1] == 'C':
+            return 'D'
+        return 'C'
