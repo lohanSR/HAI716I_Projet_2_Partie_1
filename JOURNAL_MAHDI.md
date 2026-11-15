@@ -148,3 +148,24 @@ Classement attendu :
 7. RANDOM
 
 Le vainqueur change-t-il par rapport à l'étape 2 ? Oui, c'est ALL-D qui va profiter de la baisse des points de GRIM.
+
+### Résultats du bruit
+
+- Capture d'écran : ![Résultats du bruit](resultats/etape3_bruit.png)
+- Classement obtenu :
+  1. ALL-D :         15453
+  2. GRIM :          15416
+  3. JOSS :          13842
+  4. TESTER :        13819
+  5. TIT-FOR-TAT :   13755
+  6. RANDOM :        12343
+  7. PAVLOV :        12144
+
+### Comparaison avec la prédiction
+- Ce qui était juste : les deux premières places sont exactes, ALL-D en premier et GRIM en second, donc le vainqueur change bien par rapport à l'étape 2. TESTER finit aussi devant TFT. TFT et PAVLOV perdent beaucoup de points entre eux et contre GRIM, comme prévu.
+- Ce qui était faux : JOSS finit 3e alors que je le voyais 6e, et PAVLOV finit dernier, même derrière RANDOM. GRIM ne baisse presque pas (15430 à l'étape 2, 15416 ici). Je pensais aussi que le bruit n'aurait pas un grand effet sur ALL-D, JOSS et RANDOM, mais les trois gagnent des points.
+
+### Comparaison avec l'étape 2
+- GRIM : il perd des points contre TFT (3000 avant, 2222 ici), mais il en gagne contre PAVLOV (3000 avant, 3370 ici). Après la première erreur, GRIM trahit jusqu'à la fin de la partie et joue donc comme ALL-D. PAVLOV alterne alors C et D face à lui, comme face à ALL-D, et GRIM l'exploite un tour sur deux. Les deux effets se compensent, c'est pour ça que son total ne bouge presque pas.
+- TFT et PAVLOV : ce sont les grands perdants, 1277 points en moins pour TFT et 2010 pour PAVLOV. Ils ne marquent plus 3000 contre GRIM, ni l'un contre l'autre (environ 2500). Contre TFT, PAVLOV ne retrouve pas une coopération stable après une erreur, et contre GRIM il se fait exploiter.
+- ALL-D, JOSS et RANDOM : ils profitent des erreurs des autres. ALL-D gagne 384 points car les erreurs de ses adversaires lui donnent des C à exploiter. JOSS gagne 602 points car les nouvelles erreurs cassent parfois ses échos avec TFT (2083 avant, 2404 ici) et TESTER (2062 avant, 2366 ici). RANDOM gagne 367 points sans changer de comportement, puisque inverser un coup tiré au hasard donne encore un coup au hasard.

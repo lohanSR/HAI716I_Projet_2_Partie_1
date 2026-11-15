@@ -1,0 +1,19 @@
+Étape : etape2, mode : bruit
+Nombre de parties : 5, nombre de tours : 200, graine : 42
+1. ALL-D         15453
+2. GRIM          15416
+3. JOSS          13842
+4. TESTER        13819
+5. TIT-FOR-TAT   13755
+6. RANDOM        12343
+7. PAVLOV        12144
+
+Matrice des scores (ligne = score obtenu contre la colonne) :
+                    ALL-D  TIT-FOR-TAT       RANDOM         JOSS       TESTER         GRIM       PAVLOV
+ALL-D                   -         2197         3443         2160         2152         2086         3415
+TIT-FOR-TAT          1947            -         2498         2289         2538         1987         2496
+RANDOM               1153         2498            -         2396         2507         1196         2593
+JOSS                 1980         2404         2611            -         2366         1984         2497
+TESTER               1982         2588         2527         2301            -         1943         2478
+GRIM                 2036         2222         3351         2209         2228            -         3370
+PAVLOV               1140         2516         2418         2357         2498         1215            -
