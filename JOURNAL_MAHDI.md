@@ -188,3 +188,29 @@ Qui domine à la fin, et pourquoi : GRIM, puisqu'il va remporter les premières 
 Une seule stratégie survit-elle, ou plusieurs ? Plusieurs. Une fois les stratégies basées sur le hasard et sur les tests disparues, seules les stratégies gentilles resteront avec ALL-D, qui disparaîtra en dernier. Il ne restera alors que GRIM, TFT et PAVLOV. Les parties contre soi-même comptent ici : GRIM, TFT et PAVLOV coopèrent tout du long contre leurs copies, ALL-D fait défection contre les siennes. Si seules GRIM, TFT et PAVLOV restent, elles marquent toutes 3000 entre elles et leurs parts ne bougent plus.
 
 Le vainqueur de la sélection est-il le même que celui du tournoi de l'étape 2 ? Oui, GRIM restera le vainqueur, car cette modification ne change rien à court terme et fait pencher la balance en sa faveur à long terme.
+
+### Résultats de la sélection
+
+- Capture d'écran : ![Résultats de la sélection](resultats/etape3_selection.png)
+- Ordre de disparition (part sous 1 %) : RANDOM à la génération 11, JOSS à la 15, TESTER à la 17, ALL-D à la 20.
+- Parts finales : GRIM 40,57 %, TFT 38,84 %, PAVLOV 20,59 %. Elles ne bougent plus à partir de la génération 43 environ.
+
+### Comparaison avec la prédiction
+- Ce qui était juste : presque tout. RANDOM disparaît en premier et ALL-D en dernier. Il reste plusieurs stratégies à la fin, GRIM, TFT et PAVLOV, et leurs parts se figent car elles marquent toutes 3000 entre elles et contre leurs copies. GRIM finit avec la plus grande part, comme le vainqueur de l'étape 2.
+- Ce qui était faux : GRIM ne domine pas vraiment, il a juste la plus grande part au moment où tout se fige, avec moins de 2 points de pourcentage d'avance sur TFT. Je pensais aussi que la sélection ne changerait rien à court terme, mais ALL-D grandit pendant les 3 premières générations (de 14,29 % à 14,97 %) grâce à RANDOM et PAVLOV, puis s'effondre quand RANDOM disparaît.
+
+### Comparaison avec l'étape 2
+- ALL-D : 2e du tournoi de l'étape 2, il disparaît ici. Ses points venaient surtout de RANDOM et de PAVLOV, et contre ses propres copies il ne marque que 2000. Quand RANDOM disparaît, il ne lui reste presque plus rien à exploiter.
+- GRIM et TFT : les parts finales gardent la trace des premières générations. GRIM finit devant TFT grâce à ses points contre RANDOM (3386 contre 2484 pour TFT), gagnés tant que RANDOM était encore là. Une fois les autres disparus, rien ne peut plus les départager.
+- PAVLOV : il survit mais finit avec la plus petite part. Au début, ALL-D l'exploite (1000 points pour PAVLOV contre 3500 pour ALL-D), ce qui le fait grandir moins vite que GRIM et TFT.
+- Conclusion : gagner un tournoi ne suffit pas pour survivre. Il faut bien jouer contre les stratégies qui restent, et surtout contre ses propres copies.
+
+## Conclusion : contre qui chaque stratégie joue bien ou mal
+
+- `AllD` : joue bien contre RANDOM (3524) et PAVLOV (3500), qui coopèrent souvent sans le punir durablement. Joue mal contre toutes les stratégies qui ripostent (environ 2000 contre TFT, TESTER, JOSS et GRIM) et contre ses propres copies (2000), c'est pour ça qu'il disparaît avec la sélection.
+- `TFT` : joue bien contre les stratégies gentilles, GRIM, PAVLOV et ses copies (3000). Joue mal contre ALL-D (1990) et contre JOSS et TESTER, avec qui il tombe dans un écho de punitions. Le bruit lui fait perdre beaucoup car chaque erreur peut lancer un nouvel écho.
+- `Random` : joue mal contre tout le monde, surtout contre ALL-D (984) et GRIM (1101), qui l'exploitent sans jamais pardonner. Il limite les dégâts contre TFT, TESTER et PAVLOV (environ 2500), qui lui rendent simplement la pareille.
+- `Joss` : joue bien contre RANDOM (2636). Joue mal contre les stratégies qui punissent, GRIM, TESTER et TFT (environ 2050), car chacune de ses trahisons déclenche des représailles. Avec le bruit, il s'en sort mieux car les erreurs cassent parfois ses échos.
+- `Tester` : joue bien contre RANDOM (2512) et TFT (2500). Joue mal contre GRIM (2005), qui le punit jusqu'à la fin de la partie dès son D du premier tour, contre ALL-D (2000) et contre ses propres copies (2000).
+- `Grim` : joue bien contre RANDOM (3386) et contre les stratégies gentilles (3000). Joue mal contre celles qui trahissent au premier tour ou au hasard, ALL-D, TESTER et JOSS (environ 2000), car une seule trahison met fin à la coopération pour toute la partie. Avec le bruit, il joue comme ALL-D après la première erreur.
+- `Pavlov` : joue bien contre les stratégies gentilles (3000). Joue très mal contre ALL-D (1000), et contre GRIM avec le bruit (1215) : face à un adversaire qui trahit toujours, il alterne C et D et se fait exploiter un tour sur deux.
