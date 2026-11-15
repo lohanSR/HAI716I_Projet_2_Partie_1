@@ -1,0 +1,19 @@
+Étape : etape2, mode : normal
+Nombre de parties : 5, nombre de tours : 200, graine : 42
+1. GRIM          15430
+2. ALL-D         15069
+3. TIT-FOR-TAT   15032
+4. PAVLOV        14154
+5. TESTER        13414
+6. JOSS          13240
+7. RANDOM        11976
+
+Matrice des scores (ligne = score obtenu contre la colonne) :
+                    ALL-D  TIT-FOR-TAT       RANDOM         JOSS       TESTER         GRIM       PAVLOV
+ALL-D                   -         2015         3524         2015         2000         2015         3500
+TIT-FOR-TAT          1990            -         2484         2058         2500         3000         3000
+RANDOM                984         2499            -         2371         2497         1101         2524
+JOSS                 1990         2083         2636            -         2062         2049         2420
+TESTER               2000         2500         2512         2062            -         2005         2335
+GRIM                 1990         3000         3386         2049         2005            -         3000
+PAVLOV               1000         3000         2539         2280         2335         3000            -

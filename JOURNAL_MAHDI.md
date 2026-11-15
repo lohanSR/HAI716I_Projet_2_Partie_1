@@ -97,3 +97,24 @@ Classement attendu :
 7. RANDOM
 
 Qu'est-ce qui change par rapport à l'étape 1 ? Nous avons plus de stratégies gentilles, qui gagneront plus de points les unes contre les autres, ce qui va les aider à occuper le podium. ALL-D perd trop de points contre elles et descend donc dans le classement. Il est difficile de prédire où va TESTER, mais je dirais juste après les stratégies gentilles, car il utilise un mécanisme proche du leur. JOSS et RANDOM restent aux dernières places.
+
+## Étape 2 : résultats
+
+- Capture d'écran : ![Résultats étape 2](resultats/etape2.png)
+- Classement obtenu :
+  1. GRIM :          15430
+  2. ALL-D :         15069
+  3. TIT-FOR-TAT :   15032
+  4. PAVLOV :        14154
+  5. TESTER :        13414
+  6. JOSS :          13240
+  7. RANDOM :        11976
+
+### Comparaison avec la prédiction
+- Ce qui était juste : le classement est presque juste. GRIM est en première place, puisqu'il marque le maximum (3000) contre les stratégies gentilles et gagne aussi beaucoup contre RANDOM (3386). En dehors d'ALL-D, l'ordre des autres stratégies est exactement celui prédit.
+- Ce qui était faux : la place d'ALL-D, que je voyais derrière toutes les stratégies gentilles. Il ne marque jamais moins de 2000 points contre un adversaire, et 3500 points ou plus contre PAVLOV et RANDOM, ce qui lui vaut la deuxième place. Mon erreur venait du duel contre PAVLOV : je pensais qu'ALL-D ne gagnait qu'au premier tour, mais PAVLOV alterne C et D face à lui (il change de coup après chaque 0 et chaque 2), et ALL-D l'exploite un tour sur deux.
+
+### Comparaison avec l'étape 1
+- Le vainqueur : GRIM prend la première place à ALL-D, grâce non seulement à ses points contre TFT et PAVLOV (coopération mutuelle, 3000 chacun), mais aussi aux points marqués contre RANDOM.
+- TFT : il reste 3e, mais gagne 6000 points (3000 contre GRIM, 3000 contre PAVLOV) grâce à la coopération mutuelle. Il finit à seulement 37 points de la deuxième place.
+- ALL-D : il passe de la 1re à la 2e place. Les deux nouvelles stratégies lui rapportent très différemment : GRIM le punit jusqu'à la fin de la partie dès sa première trahison (2015 points seulement, comme contre TFT), alors que PAVLOV se laisse exploiter (3500). Sans PAVLOV, ALL-D passerait derrière TFT. Il reste aussi le grand profiteur de RANDOM (3524).
