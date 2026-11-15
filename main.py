@@ -80,7 +80,10 @@ def main():
     resultats = classement(population, matrice_scores)
 
     print(f"Étape : {etape}, mode : {mode}")
-    print(f"Nombre de parties : {NB_PARTIES}, nombre de tours : {NB_TOURS}, graine : {GRAINE}")
+    if mode == "horizon":
+        print(f"Nombre de parties : {NB_PARTIES}, horizon inconnu : w = 0.99, graine : {GRAINE}")
+    else:
+        print(f"Nombre de parties : {NB_PARTIES}, nombre de tours : {NB_TOURS}, graine : {GRAINE}")
     contre_soi = MODES[mode].get("contre_soi", False)
 
     if mode == "selection":
